@@ -1,3 +1,7 @@
+Intro:
+
+1. build process
+
 STATES
 
 1. presentational (dumb, stateless) and non-presentational (smart, stateful) components
