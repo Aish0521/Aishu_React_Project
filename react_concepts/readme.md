@@ -46,3 +46,13 @@ For read-only refs are best, if e have a case to change values state is better
 4. state - controlled components (i/p in our case) as internal state is controlled by react
 5. refs - uncontrolled components (i/p in our case) as internal state is not controlled by react
 we are only using a regular DOM API to make changes in DOM node but with a react feature 'refs'
+
+9 - Side effects/ effects using reducers / context API
+1. ![Alt text](side_effect_defn.png)
+2. useEffect - useEffect(() => {//function},[dependencies])- specified code in function runs only when dependencies change not when our component re render cycles
+3. useEffect function runs after component re evaluation (render cycle) and also only if dependencies changes
+4. so useEffect is helpful in data fetching which is also a side effect
+5. can omit 'setFunctions' because it will stay the same in component re render cycles, but should add other var dependencies.
+6. useEffect cleanup - can use this to cleanup the useEffect function before it starts running (eg) debouncing // this cleanup function only starts running from 2nd time, not on first side effect.
+cleanup runs when our componnet unmounts from DOM
+7. useEffect(()=> {}) //rerenders on every time the component function re runs; useEffect(()=> {}, []) // will execute only on first time the component mounted; useEffect(()=> {},[dep]) // rerenders on the dependencies state changes; cleanup executed with empty dep array when component unmounts; cleanup executed with dep executes before useEffect function fro 2nd time
