@@ -115,3 +115,47 @@ P - Practice projects
 10 - food order app project
 bind mtd ensures pre configure what arg we are going to get when our function is executed, this is needed when we need to ensure we want to pass a particular value
 related projects: food_order_app
+
+11 - BTS of React & optimizations
+
+1.  Virtual DOM diffing
+    React - only cares about component (props, states, context) and lets Real DOM know if anything needs to be changed on screen
+    React gives info on how the component tree looks like currently and how it should look like after state update to React DOM
+    Now React DOM receives this differences and manipulates the real DOM so that it matches the virtual DOM / snapshot
+
+2.  Re evaluating components !== re rendering DOM
+    components - re render when there is changes in props, states, context
+    real dom - re render when there is differences only in component tree b/w current and expected snapshot
+
+3.  All the child components re renders by default if it's parent component re renders
+    React.memo(componentName) can be helpful in optimizing renders, as memo checks the props of component given in argument and compares if the props changed from previous render and only if the value changes it re renders
+
+    using 'memo' can itselff cause some performance hit sometimes as now react needs to store prev props value for comparison, so we should avoid using memo for all components and can use onlt if a component doesn't need more re renders or component which re renders more component tree
+
+    There is a catch in memo, it only works properly for primitives ie for example if we consider a button component with 'onclick' prop which is a function (obj in js), so memo doesn't catch that function as same function ut will consider as different function which does the same thing
+
+    Here we can use useCallback to save the objs in a react internal storage by below logic
+    const obj1 = {}
+    const obj2 = {}
+    obj1 === obj2 //false
+    obj2 = obj1
+    Now obj1 === obj2 //true
+
+    And now memo can do its work in objs too
+
+    Dependencies in useCallback is needed because in case if we have closures we should add that value as dependencies so that useCallback will work as expected // if not added useCallback wil think there is no change in function and the function won't work properly
+
+4.  React only create state var (useState) once ie duringfirst time component rendering. so
+    during component re evaluations its not created again. It just updates that state as needed
+    As long as the component is attached to DOM state s only updated not re created newly
+
+    Now state updates happens through state scheduling as there could be some other performance intensive tasks that small state updates, so there is a change we might get wrong values (may get last time state schedule value instead of last time re render value), so only its recommended to use 'function form' ((prev)=> prev) incase of prev snapshot or can also use useEffect with dependencies to get state updates incase of states which depend on other states
+
+    State batching - If we have two line of state updates one after another, react combines them and schedules them in a sync manner ie batch them and does the state update. therefore it re runs only once even if a component has many states
+
+    useCallback - memoizing (storing) functions
+    useMemo - memoizing other kinds of data
+
+    same issue of performance getting a hit may happen as t will store thr prev value and do camparison, so should use these in needed places only
+
+related projects: react_optimization_project
