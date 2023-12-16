@@ -198,3 +198,5 @@ Context: we can use Consumer or static contextType
 In useContext we can call multiple contexts multiple times in single component but here we cant use it like that or should wrap into another component and use it
 
 class comp is preferred if we are going to work on error boundaries - componentDidCatch
+
+related projects: class_based_react_project
