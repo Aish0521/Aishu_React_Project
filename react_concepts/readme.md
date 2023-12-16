@@ -156,6 +156,45 @@ related projects: food_order_app
     useCallback - memoizing (storing) functions
     useMemo - memoizing other kinds of data
 
-    same issue of performance getting a hit may happen as t will store thr prev value and do camparison, so should use these in needed places only
+    same issue of performance getting a hit may happen as it will store the prev value and do comparison, so should use these in needed places only
 
 related projects: react_optimization_project
+
+12 - Class components
+Only class components were able to handle side effects, state... before react v16.8
+After v16.8 react hooks were introduced and using that we can handle state, side effetcs now
+
+class based and functonal components can work together (eg) one comp can be class and another comp can be functional and our app will still work
+
+methods can be defined as
+class myClass {
+myMethod () {
+
+}
+}
+
+state:
+can be defined using constructor and our state will always be an obj
+
+instantiation (through constuctor) happens when react sees that we use that component being used like <MyComp />
+
+and state have to grouped in this.state={}
+can access state using this.setState() //setState also takes only obj
+unlike useState hook the state will not be overridden, it will only be merged
+(eg) this.state={
+first: 'one',
+second: 'two'
+}
+Now during calling setState to update 'first', this one will only be updated, 'second' will remain the same
+Also on this.setState((st)=> return {
+prop: st.val
+}) //if we pass a func like this we should return the value also as an obj
+In useState is overidden whereas in class its merged
+
+when we call a constructor in a class and we extend it to another class we should also define a super constructor
+
+life cycles: componentDidMount(), componentDidUpdate(), componentWillUnmount()
+Context: we can use Consumer or static contextType
+In useContext we can call multiple contexts multiple times in single component but here we cant use it like that or should wrap into another component and use it
+
+class comp is preferred if we are going to work on error boundaries - componentDidCatch
