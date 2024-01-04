@@ -200,3 +200,16 @@ In useContext we can call multiple contexts multiple times in single component b
 class comp is preferred if we are going to work on error boundaries - componentDidCatch
 
 related projects: class_based_react_project
+
+13 - Sending Http Requests (e.g. Connecting to a Database)
+We connect to DB through backend
+We connect to backend (REST API) using HTTP req
+We shouldn't access DB through react FE bcoz it will be compromising your data and important credentials might be exposed
+Usuallt FE is only build using React but full stack is also possible using frameworks like Next JS, Remix
+
+fetch, async await, loading states, handling errors, GET, POST, PUT, DELETE
+every async fh will yield a promise
+optimistic updating
+
+convert js obj to json data - JSON.stringify()
+related projects: http_reqs_project
