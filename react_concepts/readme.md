@@ -213,3 +213,26 @@ optimistic updating
 
 convert js obj to json data - JSON.stringify()
 related projects: http_reqs_project
+
+14 - custom hooks
+
+Rules of hooks
+(1) should be called only inside react components or other hooks
+(2) should only be on top level (shouldn't be inside if or for - shouldn't be nested)
+
+custom hooks is needed in case we need to reuse a part which havs other react hooks or state manipulation in it
+Need to use 'useHookName' naming convention as react imposes certain rules to those.
+eg. we can't nest one hooks inside another hook - useState inside useEffect is not permitted
+
+Now even if state updates inside custom hooks it will reflect so that state update in the react component itself
+while calling custom hook in each component separate state snapshots for that particular component is created independently
+
+await function will need a promise to be yielded
+eg const var = await promiseFn
+
+About bind - bind copies the function which we add bind to and preconfigures it. This can be used when we have functions which has parameters and if we need to preconfigure those so that js won't throw undefined error
+eg, in a function which executes onClick of button and has args
+function has bind because intrinsically in js function is an obj
+fn.bind(if we use this keyword, first param, second param, default param in last(eg: event)
+)
+related projects: custom_hooks_project
