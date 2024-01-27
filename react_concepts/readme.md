@@ -236,3 +236,35 @@ function has bind because intrinsically in js function is an obj
 fn.bind(if we use this keyword, first param, second param, default param in last(eg: event)
 )
 related projects: custom_hooks_project
+
+14 - Handling forms
+
+How to avoid page load on submission:
+
+1. onSubmit - e.preventDefault() will default form behaviour of page load //preferred
+2. assign type='button' for button html component
+
+Get values:
+
+1. using state
+2. using refs // not recommended as resetting DOM values is not encouraged
+3. Using native browser APIs - FormData(), we need name prop for that to be added in our input/ select fields
+   const fd = new FormData(e.target)
+   fd.get('email') //to get specific field
+   fd.getAll('checkboxgroups') // to get group with same name value
+   Object.fromEntries(fd.entries()) // to get all the values present
+
+Can use button type='reset' to reset the form values, using useState also we can reset; stateVal='', in refs, curret.target.value = ''//not recommended; in FormData, event.target.reset()
+
+Validation:
+
+1. onkeystroke - we can achieve using onChange and state // but UX is bad as this doesn't allow the user to complete valid value (too early)
+2. onFocus - we can achieve using onBlur //this alone might lead to error message displaying for long time (too long)
+
+good UX - combining validation and keystroke and resetting validation on onFocus is good UX
+
+3. onSubmit also can be achieved using onSubmit and state //adding validation on formSubmission alomg with onChange and onBlur can be a very good UX
+
+4. we can use 'required' to implement simple validation too. we have required, minlength, maxlength unbuilt form validation attributes also to leverage. We can combine our custom validation and inbuilt form validations together also
+
+Can use 3rd party libraries like formik, react hook form
